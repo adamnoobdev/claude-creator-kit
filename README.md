@@ -1,42 +1,60 @@
 # Claude Creator Kit
 
-En startpunkt för dig som vill använda Claude Code till att producera video och bild snabbare.
+En öppen startpunkt för creators som vill använda Claude till att producera video, bild och ljud snabbare.
 
-Klona repot, fyll i tre API-nycklar, och du har verktyg för att klippa video, generera bilder, skapa animationer och göra musik. Inget hemligt eller magiskt. Bara en organiserad mapp och några små skripts som anropar AI-tjänster åt dig.
+Klona repot, fyll i tre API-nycklar, och du har verktyg för att klippa video, generera bilder, skapa animationer och göra musik. Allt via samtal med Claude i din kodeditor. Ingen kod du behöver lära dig.
 
 ## Vad du får
 
-- **video-use**: klipp video, transkribera tal, lägg på subtitles. Klart via samtal med Claude.
-- **hyperframes**: bygg 9:16-animationer i HTML och rendera till MP4. Bra för Reels och TikTok-overlays.
-- **nano-banana**: generera bilder via Kie.ai (Googles Nano Banana 2-modell).
-- **elevenlabs**: skapa musik och ljudeffekter via ElevenLabs API.
-- **new-project**: skapar en mapp för ett nytt projekt med rätt struktur.
-
-## Vad du behöver
-
-1. **Claude Code installerat**. Se [claude.com/code](https://claude.com/code).
-2. **Node.js 22+** och **FFmpeg**. På Mac: `brew install node ffmpeg`.
-3. **Python 3.10+** för skripten.
-4. **Tre API-nycklar** (gratis-tier räcker för att testa):
-   - Anthropic (för Claude API-anrop, om du vill köra automations utöver Claude Code): [console.anthropic.com](https://console.anthropic.com)
-   - Kie.ai (för Nano Banana 2): [kie.ai](https://kie.ai)
-   - ElevenLabs (för musik och sfx): [elevenlabs.io](https://elevenlabs.io)
+- **video-use**: klipp video, transkribera tal, lägg på subtitles
+- **hyperframes**: 9:16-animationer från HTML+GSAP till MP4 (Reels, TikTok)
+- **nano-banana**: generera bilder via Kie.ai (Googles Nano Banana 2)
+- **elevenlabs**: musik och ljudeffekter via ElevenLabs API
+- **new-project**: scaffoldar en mapp för ett nytt projekt med rätt struktur
 
 ## Kom igång
 
+### 1. Installera VS Code
+
+Ladda ner från [code.visualstudio.com](https://code.visualstudio.com). Det är miljön du jobbar i.
+
+### 2. Installera Claude-extension i VS Code
+
+I VS Code: öppna Extensions (Cmd+Shift+X på Mac, Ctrl+Shift+X på Windows), sök "Claude Code", klicka Install. Logga in när du blir promptad.
+
+### 3. Installera Node, FFmpeg och Python
+
+Behövs för rendering och API-anrop. På Mac:
+
 ```bash
-# 1. Klona repot
-git clone https://github.com/adamnoobdev/claude-creator-kit.git
-cd claude-creator-kit
-
-# 2. Kopiera .env.example till .env och fyll i nycklarna
-cp .env.example .env
-
-# 3. Starta Claude Code i mappen
-claude
+brew install node ffmpeg python
 ```
 
-I Claude Code, säg t.ex. `/new-project min-forsta-video` så scaffoldar Claude en projektmapp åt dig.
+Saknar du Homebrew? Installera från [brew.sh](https://brew.sh) först.
+
+På Windows: ladda ner från [nodejs.org](https://nodejs.org), [ffmpeg.org](https://ffmpeg.org/download.html), [python.org](https://python.org).
+
+### 4. Ladda ner kit:et
+
+```bash
+git clone https://github.com/adamnoobdev/claude-creator-kit.git
+```
+
+Eller [ladda ner som ZIP](https://github.com/adamnoobdev/claude-creator-kit/archive/refs/heads/main.zip).
+
+### 5. Fyll i dina API-nycklar
+
+Öppna mappen i VS Code. Kopiera `.env.example` till `.env` och klistra in nycklar från:
+
+- [console.anthropic.com](https://console.anthropic.com) (Claude API)
+- [kie.ai](https://kie.ai) (Nano Banana 2)
+- [elevenlabs.io](https://elevenlabs.io) (musik och sfx)
+
+Alla har gratis-tier som räcker för att testa.
+
+### 6. Säg till Claude: "Hjälp mig komma igång"
+
+Öppna Claude-panelen i VS Code och skriv det. Claude tar det därifrån.
 
 ## Mappstruktur
 
@@ -45,12 +63,8 @@ claude-creator-kit/
 ├── .claude/skills/      ← verktygen Claude kan använda
 ├── templates/project/   ← mallen för nya projekt
 ├── projects/            ← här hamnar dina projekt
-└── web/                 ← landningssida (kan ignoreras)
+└── web/                 ← landningssida
 ```
-
-## Hjälp
-
-Be Claude direkt: `Hjälp mig komma igång` eller `Vad kan du göra här?`
 
 ## Licens
 
