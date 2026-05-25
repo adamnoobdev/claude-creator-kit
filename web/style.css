@@ -65,6 +65,14 @@ header {
   margin-bottom: 96px;
 }
 
+.logo-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 40px;
+}
+
 .logo {
   display: inline-flex;
   align-items: center;
@@ -75,8 +83,30 @@ header {
   padding: 6px 12px;
   border: 1px solid var(--border);
   border-radius: 100px;
-  margin-bottom: 40px;
   background: var(--bg-elev);
+}
+
+.byline {
+  display: inline-flex;
+  align-items: center;
+  font-size: 13px;
+  color: var(--fg-muted);
+  padding: 6px 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: var(--bg-elev);
+}
+
+.byline:hover {
+  border-color: var(--accent);
+  color: var(--fg);
+  opacity: 1;
+}
+
+.byline strong {
+  color: var(--fg);
+  font-weight: 600;
+  margin-left: 4px;
 }
 
 .logo-mark {
@@ -493,15 +523,24 @@ footer {
 
 footer p {
   font-size: 14px;
-  color: var(--fg-subtle);
+  color: var(--fg-muted);
   margin: 0;
+}
+
+footer a {
+  color: var(--fg);
+  font-weight: 500;
+}
+
+footer a:hover {
+  color: var(--accent);
 }
 
 .footer-sub {
   margin-top: 8px;
   font-size: 12px;
   color: var(--fg-subtle);
-  opacity: 0.6;
+  opacity: 0.7;
 }
 
 /* Tablet */
