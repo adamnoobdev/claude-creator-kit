@@ -198,12 +198,7 @@
           <div id="s3-mark" class="outro-mark">/</div>
           <div id="s3-url" class="outro-url">claude-creator-kit.vercel.app</div>
           <div id="s3-tagline" class="outro-tagline">Öppen källkod. MIT-licens.</div>
-          <div id="s3-credit" class="outro-credit">Skapad av <strong>Adam Larson</strong></div>
         </div>
-      </div>
-
-      <div id="watermark-clip" class="clip" data-start="0" data-duration="10" data-track-index="2">
-        <div id="watermark" class="watermark">av <strong>Adam Larson</strong></div>
       </div>
     </div>
 
@@ -238,11 +233,7 @@
       // Scene 3: Outro (7 - 10s)
       tl.from("#s3-mark", { opacity: 0, scale: 0.5, duration: 0.7, ease: "power3.out" }, 7.1);
       tl.from("#s3-url", { opacity: 0, y: 24, duration: 0.7, ease: "power2.out" }, 7.5);
-      tl.from("#s3-tagline", { opacity: 0, y: 16, duration: 0.5, ease: "power2.out" }, 7.9);
-      tl.from("#s3-credit", { opacity: 0, y: 16, duration: 0.5, ease: "power2.out" }, 8.1);
-
-      // Persistent watermark fade-in
-      tl.from("#watermark", { opacity: 0, duration: 0.5, ease: "power2.out" }, 0.6);
+      tl.from("#s3-tagline", { opacity: 0, y: 16, duration: 0.6, ease: "power2.out" }, 7.9);
 
       window.__timelines["main"] = tl;
     </script>
