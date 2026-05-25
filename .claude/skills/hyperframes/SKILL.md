@@ -1,13 +1,27 @@
 ---
 name: hyperframes
-description: Bygg 9:16-animationer från HTML+GSAP och rendera till MP4. Trigger när användaren säger "hyperframes", "html till video", "gsap-animation", "9:16 animation", "rendra animation", eller jobbar i en `animations/`-mapp.
+description: Rendera animationer från HTML+GSAP till MP4 i valfri dimension. Trigger när användaren säger "hyperframes", "html till video", "gsap-animation", "rendra animation", "text-card", "lower-third", eller jobbar i en `animations/`-mapp.
 ---
 
 ## Vad HyperFrames är
 
 En open-source HTML-till-video-pipeline från HeyGen ([github.com/heygen-com/hyperframes](https://github.com/heygen-com/hyperframes)). Tar en `index.html` med GSAP-timeline, renderar via Puppeteer + FFmpeg till MP4.
 
-Bra för: snabba branded animations (text-cards, bars, charts, CTA-overlays) som klipps in i Premiere ovanpå live-action.
+Bra för: snabba branded animations (text-cards, bars, charts, lower-thirds, CTA-overlays) som klipps in i Premiere ovanpå live-action.
+
+## Dimensioner
+
+HyperFrames är format-agnostiskt. Vanliga val:
+
+| Format | Dimension | Användning |
+|---|---|---|
+| 9:16 | 1080×1920 | Reels, TikTok, Shorts |
+| 16:9 | 1920×1080 | YouTube, web, broadcast |
+| 1:1 | 1080×1080 | Instagram feed, LinkedIn |
+| 4:5 | 1080×1350 | Instagram feed (portrait) |
+| 21:9 | 2560×1080 | Cinematic, banner |
+
+Sätt `data-width` och `data-height` på root-elementet, sen renderar HyperFrames i den dimensionen.
 
 ## Mappstruktur (per projekt)
 
@@ -101,8 +115,8 @@ Frame N = sekund × fps. 30fps: frame 60 = 2s, frame 150 = 5s.
 ## Regler
 
 1. Använd `power2.out` / `power3.out` / `power2.inOut` eases. Aldrig `back.out`, `elastic.out`, `bounce.out` om inte användaren explicit vill ha leksak-känsla.
-2. 9:16 default: 1080×1920. Bara 16:9 om användaren ber.
-3. 30fps default. 60fps bara om animation kräver smooth motion.
+2. Fråga vilken dimension om det inte är uppenbart. 9:16 (1080×1920) är vanligast för social, 16:9 (1920×1080) för YouTube och web.
+3. 30fps default. 60fps bara om animation kräver smooth motion (snabba sweeps, gaming-content).
 4. `will-change: top, height, opacity` på animerade element.
 5. Total `top + height` ska vara inom canvas-höjd, annars klipps element av.
 

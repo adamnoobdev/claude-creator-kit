@@ -7,7 +7,7 @@ Klona repot, fyll i tre API-nycklar, och du har verktyg för att klippa video, g
 ## Vad du får
 
 - **video-use**: klipp video, transkribera tal, lägg på subtitles
-- **hyperframes**: 9:16-animationer från HTML+GSAP till MP4 (Reels, TikTok)
+- **hyperframes**: animationer från HTML+GSAP till MP4 i valfri dimension (9:16 för Reels/TikTok, 16:9 för YouTube, 1:1 för feed)
 - **nano-banana**: generera bilder via Kie.ai (Googles Nano Banana 2)
 - **elevenlabs**: musik och ljudeffekter via ElevenLabs API
 - **new-project**: scaffoldar en mapp för ett nytt projekt med rätt struktur
