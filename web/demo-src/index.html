@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        background: #0A0A0B;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        color: #F5F5F7;
+      }
+
+      .mono {
+        font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
+      }
+
+      .glow {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 1200px;
+        height: 800px;
+        background: radial-gradient(ellipse at center, rgba(255, 107, 53, 0.45), transparent 65%);
+        filter: blur(120px);
+        opacity: 0;
+      }
+
+      .scene {
+        position: absolute;
+        inset: 0;
+      }
+
+      .scene-inner {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+      }
+
+      /* Scene 1: Title */
+      .logo-row {
+        display: flex;
+        align-items: baseline;
+        gap: 32px;
+        margin-bottom: 32px;
+      }
+
+      .mark {
+        font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
+        font-size: 180px;
+        font-weight: 700;
+        color: #FF6B35;
+        line-height: 1;
+      }
+
+      .brand {
+        font-size: 140px;
+        font-weight: 700;
+        letter-spacing: -0.04em;
+        line-height: 1;
+      }
+
+      .tagline {
+        font-size: 48px;
+        font-weight: 500;
+        color: #A1A1AA;
+        letter-spacing: -0.01em;
+      }
+
+      .tagline .accent {
+        background: linear-gradient(135deg, #FF6B35, #FFB089);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        color: transparent;
+      }
+
+      /* Scene 2: Tags */
+      .tags {
+        display: flex;
+        gap: 24px;
+        flex-wrap: wrap;
+        justify-content: center;
+        max-width: 1600px;
+      }
+
+      .tag {
+        font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
+        font-size: 56px;
+        font-weight: 600;
+        color: #FF6B35;
+        background: rgba(255, 107, 53, 0.08);
+        border: 2px solid rgba(255, 107, 53, 0.4);
+        border-radius: 16px;
+        padding: 28px 48px;
+        letter-spacing: 0.04em;
+        opacity: 0;
+      }
+
+      /* Scene 3: Outro */
+      .outro-mark {
+        font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
+        font-size: 120px;
+        font-weight: 700;
+        color: #FF6B35;
+        line-height: 1;
+        margin-bottom: 32px;
+      }
+
+      .outro-url {
+        font-family: "SF Mono", Menlo, Monaco, "Courier New", monospace;
+        font-size: 56px;
+        font-weight: 500;
+        color: #F5F5F7;
+        letter-spacing: -0.01em;
+      }
+
+      .outro-tagline {
+        font-size: 36px;
+        font-weight: 500;
+        color: #A1A1AA;
+        margin-top: 24px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="10"
+      data-width="1920"
+      data-height="1080"
+    >
+      <div id="glow" class="glow clip" data-start="0" data-duration="10" data-track-index="0"></div>
+
+      <div class="scene clip" data-start="0" data-duration="4" data-track-index="1">
+        <div id="scene1" class="scene-inner">
+          <div class="logo-row">
+            <span id="s1-mark" class="mark">/</span>
+            <span id="s1-brand" class="brand">creator kit</span>
+          </div>
+          <div id="s1-tagline" class="tagline">Producera snabbare med <span class="accent">Claude</span>.</div>
+        </div>
+      </div>
+
+      <div class="scene clip" data-start="4" data-duration="3" data-track-index="1">
+        <div id="scene2" class="scene-inner">
+          <div class="tags">
+            <div id="tag-video" class="tag">VIDEO</div>
+            <div id="tag-image" class="tag">IMAGE</div>
+            <div id="tag-anim" class="tag">ANIMATION</div>
+            <div id="tag-audio" class="tag">AUDIO</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scene clip" data-start="7" data-duration="3" data-track-index="1">
+        <div id="scene3" class="scene-inner">
+          <div id="s3-mark" class="outro-mark">/</div>
+          <div id="s3-url" class="outro-url">claude-creator-kit.vercel.app</div>
+          <div id="s3-tagline" class="outro-tagline">Öppen källkod. MIT-licens.</div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+
+      // Persistent glow
+      tl.fromTo("#glow", { opacity: 0 }, { opacity: 1, duration: 0.6, ease: "power2.out" }, 0);
+
+      // Scene 1: Title build (0 - 4s)
+      tl.from("#s1-mark", { opacity: 0, scale: 0.4, duration: 0.8, ease: "power3.out" }, 0.4);
+      tl.from("#s1-brand", { opacity: 0, x: -40, duration: 0.9, ease: "power3.out" }, 0.7);
+      tl.from("#s1-tagline", { opacity: 0, y: 30, duration: 0.7, ease: "power2.out" }, 1.4);
+      // Scene 1 exit (3.4 - 4.0)
+      tl.to("#scene1", { opacity: 0, y: -40, duration: 0.6, ease: "power2.in" }, 3.4);
+      tl.set("#scene1", { visibility: "hidden", opacity: 0 }, 4.0);
+
+      // Scene 2: Tags (4 - 7s)
+      tl.to("#tag-video", { opacity: 1, duration: 0.5, ease: "power2.out" }, 4.1);
+      tl.from("#tag-video", { x: 60, duration: 0.5, ease: "power2.out" }, 4.1);
+      tl.to("#tag-image", { opacity: 1, duration: 0.5, ease: "power2.out" }, 4.25);
+      tl.from("#tag-image", { x: 60, duration: 0.5, ease: "power2.out" }, 4.25);
+      tl.to("#tag-anim", { opacity: 1, duration: 0.5, ease: "power2.out" }, 4.4);
+      tl.from("#tag-anim", { x: 60, duration: 0.5, ease: "power2.out" }, 4.4);
+      tl.to("#tag-audio", { opacity: 1, duration: 0.5, ease: "power2.out" }, 4.55);
+      tl.from("#tag-audio", { x: 60, duration: 0.5, ease: "power2.out" }, 4.55);
+      // Scene 2 exit (6.4 - 7.0)
+      tl.to("#scene2", { opacity: 0, y: -30, duration: 0.6, ease: "power2.in" }, 6.4);
+      tl.set("#scene2", { visibility: "hidden", opacity: 0 }, 7.0);
+
+      // Scene 3: Outro (7 - 10s)
+      tl.from("#s3-mark", { opacity: 0, scale: 0.5, duration: 0.7, ease: "power3.out" }, 7.1);
+      tl.from("#s3-url", { opacity: 0, y: 24, duration: 0.7, ease: "power2.out" }, 7.5);
+      tl.from("#s3-tagline", { opacity: 0, y: 16, duration: 0.6, ease: "power2.out" }, 7.9);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

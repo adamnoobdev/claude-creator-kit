@@ -120,6 +120,26 @@ section {
   margin-bottom: 96px;
 }
 
+/* Demo */
+.demo {
+  margin-bottom: 96px;
+}
+
+.demo video {
+  width: 100%;
+  display: block;
+  border-radius: var(--radius);
+  border: 1px solid var(--border-soft);
+  background: var(--bg-card);
+}
+
+.demo-caption {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--fg-subtle);
+  text-align: center;
+}
+
 h2 {
   font-size: 32px;
   font-weight: 700;
