@@ -1,0 +1,26 @@
+# Secrets
+.env
+.env.local
+
+# Dependencies
+node_modules/
+__pycache__/
+*.pyc
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Render-outputs i projektmappar
+projects/**/*.mp4
+projects/**/*.mov
+projects/**/*.mp3
+projects/**/*.wav
+projects/**/*.png
+projects/**/*.jpg
+projects/**/*.jpeg
+
+# Lokala bygg-mappar
+.next/
+dist/
+build/

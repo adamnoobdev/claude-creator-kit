@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Creator Kit</title>
+  <meta name="description" content="Producera video, bild och ljud snabbare med Claude Code. En öppen startpunkt för creators.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Claude Creator Kit</h1>
+      <p class="tagline">Producera video, bild och ljud snabbare med Claude Code.</p>
+    </header>
+
+    <section>
+      <h2>Vad är det?</h2>
+      <p>En öppen startpunkt för creators som vill använda AI på riktigt i sitt produktionsflöde. Du klonar en mapp, fyller i tre API-nycklar, och har verktyg för att klippa video, generera bilder, skapa animationer och göra musik. Allt drivet via samtal med Claude Code i terminalen.</p>
+      <p>Inget hemligt eller magiskt. Bara en organiserad mapp och några små skripts.</p>
+    </section>
+
+    <section>
+      <h2>Kom igång</h2>
+      <ol>
+        <li>
+          <strong>Installera Claude Code.</strong> Följ instruktionerna på <a href="https://claude.com/code" target="_blank" rel="noopener">claude.com/code</a>.
+        </li>
+        <li>
+          <strong>Installera Node, FFmpeg och Python.</strong> På Mac:
+          <pre><code>brew install node ffmpeg python</code></pre>
+        </li>
+        <li>
+          <strong>Klona kit:et.</strong>
+          <pre><code id="clone-cmd">git clone https://github.com/adamnoobdev/claude-creator-kit.git
+cd claude-creator-kit</code></pre>
+          <button id="copy-btn" type="button">Kopiera kommandot</button>
+        </li>
+        <li>
+          <strong>Fyll i dina API-nycklar.</strong>
+          <pre><code>cp .env.example .env</code></pre>
+          Öppna <code>.env</code> i en editor och klistra in nycklar från tjänsterna nedan.
+        </li>
+        <li>
+          <strong>Starta Claude Code.</strong>
+          <pre><code>claude</code></pre>
+          Säg sen till Claude: <em>"Hjälp mig komma igång"</em>.
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>Vad du behöver registrera dig för</h2>
+      <ul class="services">
+        <li>
+          <a href="https://console.anthropic.com" target="_blank" rel="noopener">Anthropic Console</a>
+          <span>För Claude API. Gratis-tier ger dig credits att testa med.</span>
+        </li>
+        <li>
+          <a href="https://kie.ai" target="_blank" rel="noopener">Kie.ai</a>
+          <span>För bildgenerering med Nano Banana 2. Gratis-tier finns.</span>
+        </li>
+        <li>
+          <a href="https://elevenlabs.io" target="_blank" rel="noopener">ElevenLabs</a>
+          <span>För musik och ljudeffekter. Gratis-tier med månads-credits.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Vad du kan göra</h2>
+      <div class="cards">
+        <div class="card">
+          <h3>Klipp video</h3>
+          <p>Be Claude transkribera, klippa, lägga subtitles på dina filer. Du säger vad du vill, Claude gör det.</p>
+        </div>
+        <div class="card">
+          <h3>Bygg 9:16-animationer</h3>
+          <p>HyperFrames-skillen renderar HTML+GSAP till MP4. Bra för text-overlays, charts och CTA-kort till Reels och TikTok.</p>
+        </div>
+        <div class="card">
+          <h3>Generera bilder</h3>
+          <p>Nano Banana 2 via Kie.ai. Stills, portraits, product-shots, backgrounds. Beskriv vad du vill, få bild på 10-30 sek.</p>
+        </div>
+        <div class="card">
+          <h3>Skapa musik och ljud</h3>
+          <p>ElevenLabs Music för bakgrundsmusik, Sound Effects för korta sfx. Beskriv genre och mood (men inga artistnamn).</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <h2>Klart att börja?</h2>
+      <p>Kopiera kommandot och kör i din terminal.</p>
+      <pre><code id="clone-cmd-2">git clone https://github.com/adamnoobdev/claude-creator-kit.git</code></pre>
+      <button id="copy-btn-2" type="button">Kopiera repo-URL</button>
+      <p><a href="https://github.com/adamnoobdev/claude-creator-kit" target="_blank" rel="noopener">Öppna på GitHub →</a></p>
+    </section>
+
+    <footer>
+      <p>MIT-licens. Fork:a, modifiera, använd kommersiellt.</p>
+    </footer>
+  </main>
+
+  <script>
+    function setupCopy(btnId, cmdId, repoOnly) {
+      const btn = document.getElementById(btnId);
+      const cmd = document.getElementById(cmdId);
+      if (!btn || !cmd) return;
+      btn.addEventListener("click", () => {
+        const text = repoOnly
+          ? "https://github.com/adamnoobdev/claude-creator-kit.git"
+          : cmd.textContent;
+        navigator.clipboard.writeText(text).then(() => {
+          const original = btn.textContent;
+          btn.textContent = "Kopierat";
+          setTimeout(() => { btn.textContent = original; }, 1500);
+        });
+      });
+    }
+    setupCopy("copy-btn", "clone-cmd", false);
+    setupCopy("copy-btn-2", "clone-cmd-2", true);
+  </script>
+</body>
+</html>
