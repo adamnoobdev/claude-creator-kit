@@ -8,9 +8,11 @@ description: Generera musik, ljudeffekter eller dubba video/audio till andra spr
 ElevenLabs har tre generativa audio-funktioner:
 - **Music**: skapar bakgrundsmusik från text-prompt (genre, instrument, tempo)
 - **Sound Effects**: korta ljudeffekter (whoosh, impact, ambience, etc.)
-- **Dubbing**: översätter och dubbar video/audio till andra språk, behåller talarens röstkaraktär
+- **Dubbing**: översätter och dubbar video/audio till andra språk, behåller talarens röstkaraktär (bara ljud, ingen läppsynk)
 
 Alla anropas via samma `ELEVENLABS_API_KEY`.
+
+**Om läppsynk:** Dubbing re-animerar inte munrörelser. Det dubbade talet läggs i ungefär samma timing som originalet, men läpparna rör sig enligt källspråket. På närbild syns mismatchen. Vill du ha läppsynk är det ett separat steg via ElevenLabs Lip Sync (Image & Video / Studio), som re-animerar munnen. Flöde: dubba ljudet först, kör sen videon genom Lip Sync.
 
 ## Var det bor
 
@@ -103,7 +105,7 @@ Språkkoden i URL:en matchar `target_lang`.
 
 - Musik: max 5 min per generation, ~30-90 sek genererings-tid
 - SFX: max 22 sek
-- Dubbning: audio-dubbning, läppsynk matchar inte alltid perfekt (syns i talking-head närbild). Maskinöversättningen bör korrekturläsas innan sändning. Review alltid output för broadcast-kvalitet.
+- Dubbning: ingen läppsynk i Dubbing-produkten, läpparna rör sig enligt källspråket (läppsynk är ett separat steg, se ovan). Maskinöversättningen bör korrekturläsas innan sändning. Review alltid output för broadcast-kvalitet.
 - Free-tier har månads-credits-cap. Dubbning drar mer credits än musik/sfx.
 
 ## Docs
