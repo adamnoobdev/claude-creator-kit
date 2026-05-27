@@ -1,15 +1,16 @@
 ---
 name: elevenlabs
-description: Generera musik eller ljudeffekter via ElevenLabs API. Trigger när användaren säger "generera musik", "skapa låt", "ljudeffekt", "sfx", "background music", eller behöver audio till ett projekt.
+description: Generera musik, ljudeffekter eller dubba video/audio till andra språk via ElevenLabs API. Trigger när användaren säger "generera musik", "skapa låt", "ljudeffekt", "sfx", "background music", "dubba", "översätt video", "voiceover på engelska", eller behöver audio till ett projekt.
 ---
 
 ## Vad det är
 
-ElevenLabs har två generativa audio-modeller:
+ElevenLabs har tre generativa audio-funktioner:
 - **Music**: skapar bakgrundsmusik från text-prompt (genre, instrument, tempo)
 - **Sound Effects**: korta ljudeffekter (whoosh, impact, ambience, etc.)
+- **Dubbing**: översätter och dubbar video/audio till andra språk, behåller talarens röstkaraktär
 
-Båda anropas via samma `ELEVENLABS_API_KEY`.
+Alla anropas via samma `ELEVENLABS_API_KEY`.
 
 ## Var det bor
 
@@ -43,6 +44,48 @@ curl -X POST https://api.elevenlabs.io/v1/sound-generation \
   --output projects/<projekt>/assets/audio/sfx.mp3
 ```
 
+## Anrop: Dubbing
+
+Dubbning körs i tre steg: starta jobb, polla status, ladda ner.
+
+### 1. Starta dubbnings-jobb
+
+```bash
+curl -X POST https://api.elevenlabs.io/v1/dubbing \
+  -H "xi-api-key: $ELEVENLABS_API_KEY" \
+  -F "file=@projects/<projekt>/assets/video/original.mp4" \
+  -F "target_lang=en" \
+  -F "source_lang=sv" \
+  -F "num_speakers=0"
+```
+
+Svaret innehåller ett `dubbing_id`. `target_lang`/`source_lang` är ISO 639-1-koder (sv, en, de, es, fr...). `num_speakers=0` auto-detekterar antalet talare.
+
+Användbara flaggor:
+- `drop_background_audio=true` tar bort originalljud bakom rösten
+- `disable_voice_cloning=true` använder standard-röster istället för att klona talaren
+- `highest_resolution=true` för video-output i full kvalitet
+- `target_accent` (experimentell) styr accent i målspråket
+
+### 2. Kolla status
+
+```bash
+curl https://api.elevenlabs.io/v1/dubbing/<dubbing_id> \
+  -H "xi-api-key: $ELEVENLABS_API_KEY"
+```
+
+Fältet `status` blir `dubbed` när det är klart. Polla med ~10 sek mellanrum.
+
+### 3. Ladda ner resultatet
+
+```bash
+curl https://api.elevenlabs.io/v1/dubbing/<dubbing_id>/audio/en \
+  -H "xi-api-key: $ELEVENLABS_API_KEY" \
+  --output projects/<projekt>/exports/dubbed-en.mp4
+```
+
+Språkkoden i URL:en matchar `target_lang`.
+
 ## Prompt-tips
 
 ### Musik
@@ -60,7 +103,8 @@ curl -X POST https://api.elevenlabs.io/v1/sound-generation \
 
 - Musik: max 5 min per generation, ~30-90 sek genererings-tid
 - SFX: max 22 sek
-- Free-tier har månads-credits-cap
+- Dubbning: audio-dubbning, läppsynk matchar inte alltid perfekt (syns i talking-head närbild). Maskinöversättningen bör korrekturläsas innan sändning. Review alltid output för broadcast-kvalitet.
+- Free-tier har månads-credits-cap. Dubbning drar mer credits än musik/sfx.
 
 ## Docs
 
